@@ -57,7 +57,7 @@ contract ContractProxy {
     return getAddress(_IMPLEMENTATION_SLOT);
   }
 
-  function transfer(address token, address recipent, uint256 amount) public tokenListed(token) returns (bool) {
+  function transfer(address token, address recipent, uint256 amount) public tokenListed(token) onlyGovernance returns (bool) {
     (bool success, ) = implementation().delegatecall(
       abi.encodeWithSignature("transfer(address,address,uint256)", token, recipent, amount)
     );
